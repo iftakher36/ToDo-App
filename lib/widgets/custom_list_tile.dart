@@ -44,11 +44,12 @@ class CustomListTile extends StatelessWidget {
                     border: Border.all(color: Colors.grey,width: 2)
 
                   ),
-                  child: toDoModel.isCompleted?SvgPicture.asset("assets/checked.svg",width: 25,height: 25,):Container(),
+                  child: toDoModel.isCompleted?SvgPicture.asset("assets/checked.svg",width: 12,height: 12,fit: BoxFit.none,):Container(),
                 )),
             const SizedBox(width: 10,),
             Expanded(
-              child: GestureDetector(
+              child: InkWell(
+                splashColor: Colors.black26,
                 onTap: (){
                   navigateFunction(context,toDoModel);
                 },

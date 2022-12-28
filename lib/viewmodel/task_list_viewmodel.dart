@@ -16,14 +16,28 @@ class TaskListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  deleteIncompleteTask(int incompleteIndex) async {
+    await UserTask().deleteData(incomplete[incompleteIndex].taskId!);
+    incomplete.removeAt(incompleteIndex);
+    notifyListeners();
+  }
+
+  deleteCompletedTask(int completeIndex) async {
+    await UserTask().deleteData(complete[completeIndex].taskId!);
+    complete.removeAt(completeIndex);
+    notifyListeners();
+  }
+
   changeIncompleteTaskCheckBox(int incompleteTaskIndex) {
     updateTaskStatus(incomplete[incompleteTaskIndex].taskId!, true);
     notifyListeners();
   }
+
   changeCompleteTaskCheckBox(int completeTaskIndex) {
     updateTaskStatus(complete[completeTaskIndex].taskId!, false);
     notifyListeners();
   }
+
   updateTaskStatus(int rowId, bool status) async {
     await UserTask().updateTaskStatus(rowId, status).then((value) {
       getCompleteAndIncompleteData();
@@ -33,9 +47,10 @@ class TaskListViewModel with ChangeNotifier {
   navigateToTaskCreatePage(BuildContext context) {
     Navigator.pushNamed(context, Constant.createTask);
   }
-  navigateToTaskCreatePageWithData(BuildContext context,ToDoModel toDoModel){
-    Navigator.pushNamed(context, Constant.createTask,arguments: {Constant.todoModel: toDoModel});
 
+  navigateToTaskCreatePageWithData(BuildContext context, ToDoModel toDoModel) {
+    Navigator.pushNamed(context, Constant.createTask,
+        arguments: {Constant.todoModel: toDoModel});
   }
 
   getFormattedDate() {

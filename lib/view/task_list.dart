@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/utils/apptheme.dart';
 import 'package:todolist/viewmodel/task_list_viewmodel.dart';
-
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../widgets/custom_list_tile.dart';
 import '../widgets/custom_text.dart';
 
@@ -89,21 +89,38 @@ class _TaskListState extends State<TaskList> {
                                                   color: AppTheme.colorText,
                                                   fontSize: 18,
                                                 )
-                                              : CustomListTile(
-                                                  checkFunction: Provider.of<
-                                                              TaskListViewModel>(
-                                                          context,
-                                                          listen: false)
-                                                      .changeIncompleteTaskCheckBox,
-                                                  index: indexIncomplete - 1,
-                                                  navigateFunction: Provider.of<
-                                                              TaskListViewModel>(
-                                                          context,
-                                                          listen: false)
-                                                      .navigateToTaskCreatePageWithData,
-                                                  toDoModel: data.incomplete[
-                                                      indexIncomplete - 1],
-                                                );
+                                              : Slidable(
+                                              endActionPane: ActionPane(
+                                              motion: const StretchMotion(),
+                                              children: [
+                                                SlidableAction(
+                                                  // An action can be bigger than the others.
+                                                  flex: 1,
+                                                  foregroundColor: AppTheme.lightPrimaryColor,
+                                                  icon: Icons.delete,
+                                                  label: 'Delete',
+                                                  onPressed: (BuildContext context) {
+                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteIncompleteTask(indexIncomplete-1);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                                child: CustomListTile(
+                                                    checkFunction: Provider.of<
+                                                                TaskListViewModel>(
+                                                            context,
+                                                            listen: false)
+                                                        .changeIncompleteTaskCheckBox,
+                                                    index: indexIncomplete - 1,
+                                                    navigateFunction: Provider.of<
+                                                                TaskListViewModel>(
+                                                            context,
+                                                            listen: false)
+                                                        .navigateToTaskCreatePageWithData,
+                                                    toDoModel: data.incomplete[
+                                                        indexIncomplete - 1],
+                                                  ),
+                                              );
                                         })
                                     : Container()
                                 : Provider.of<TaskListViewModel>(context,
@@ -134,21 +151,37 @@ class _TaskListState extends State<TaskList> {
                                                     fontSize: 18,
                                                   ),
                                                 )
-                                              : CustomListTile(
-                                                  checkFunction: Provider.of<
-                                                              TaskListViewModel>(
-                                                          context,
-                                                          listen: false)
-                                                      .changeCompleteTaskCheckBox,
-                                                  index: indexComplete - 1,
-                                                  navigateFunction: Provider.of<
-                                                              TaskListViewModel>(
-                                                          context,
-                                                          listen: false)
-                                                      .navigateToTaskCreatePageWithData,
-                                                  toDoModel: data.complete[
-                                                      indexComplete - 1],
-                                                );
+                                              : Slidable(
+                                            endActionPane: ActionPane(
+                                              motion: const StretchMotion(),
+                                              children: [
+                                                SlidableAction(
+                                                  flex: 1,
+                                                  foregroundColor: AppTheme.lightPrimaryColor,
+                                                  icon: Icons.delete,
+                                                  label: 'Delete',
+                                                  onPressed: (BuildContext context) {
+                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteCompletedTask(indexComplete-1);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                                child: CustomListTile(
+                                                    checkFunction: Provider.of<
+                                                                TaskListViewModel>(
+                                                            context,
+                                                            listen: false)
+                                                        .changeCompleteTaskCheckBox,
+                                                    index: indexComplete - 1,
+                                                    navigateFunction: Provider.of<
+                                                                TaskListViewModel>(
+                                                            context,
+                                                            listen: false)
+                                                        .navigateToTaskCreatePageWithData,
+                                                    toDoModel: data.complete[
+                                                        indexComplete - 1],
+                                                  ),
+                                              );
                                         })
                                     : Container(),
                           );
