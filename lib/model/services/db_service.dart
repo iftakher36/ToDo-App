@@ -26,7 +26,7 @@ class DbService {
             onCreate: (db, version) {
       return db.execute(
           "CREATE TABLE ${Constant.tblName}(${Constant.rowId} $dbIntPrimaryType,${Constant.taskTitle} $dbTextType,"
-          "${Constant.taskDetails} $dbTextType,${Constant.createDate} $dbTextType)");
+          "${Constant.taskDetails} $dbTextType,${Constant.createDate} $dbTextType,${Constant.isTaskCompleted} $dbBoolType)");
     }, version: 1, onUpgrade: _onUpgrade);
     return database;
   }

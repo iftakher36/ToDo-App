@@ -1,6 +1,6 @@
 class Constant {
   //table name
-  static const String tblName = "To do task";
+  static const String tblName = "Todotask";
 
   //column name
   static const String rowId = "rowId";
@@ -12,4 +12,7 @@ class Constant {
   //all the route name
   static const String taskList = "/";
   static const String createTask = "/createTask";
+
+  //route argument
+  static const String todoModel = "todoModel";
 }

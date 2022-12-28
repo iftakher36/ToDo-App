@@ -6,16 +6,16 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField(
       {Key? key,
         required this.textEditingController,
-        required FocusNode focusTask,
+        required FocusNode focusTaskNode,
         required bool focusOnTask,
         required String label})
-      : _focusTask = focusTask,
+      : _focusTaskNode = focusTaskNode,
         _focusOnTask = focusOnTask,
         _label = label,
         super(key: key);
 
   final TextEditingController textEditingController;
-  final FocusNode _focusTask;
+  final FocusNode _focusTaskNode;
   final bool _focusOnTask;
   final String _label;
 
@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: textEditingController,
-      focusNode: _focusTask,
+      focusNode: _focusTaskNode,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       decoration: InputDecoration(
