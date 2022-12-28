@@ -24,7 +24,7 @@ Create your Task
 <hr></hr>
 <img src="https://user-images.githubusercontent.com/25559056/209839010-ee74fff8-d817-4cd9-9c6d-8aafcc2a5243.jpg" width="200">
 
-Delete your existing Task
+Slide to Delete your existing Task
 <hr></hr>
 <img src="https://user-images.githubusercontent.com/25559056/209855517-f05cf015-0954-4e0f-b0d6-0ae8696810ba.jpg" width="200">
 
