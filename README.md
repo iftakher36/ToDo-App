@@ -1,6 +1,7 @@
 # todolist
 
 A simple todo list application
+I have used Provider as a state management plugin and used Sqflite as local database.
 
 Here is some snap of my projects
 
