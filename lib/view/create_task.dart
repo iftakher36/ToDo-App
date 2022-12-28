@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/viewmodel/create_task_viewmodel.dart';
 
@@ -58,7 +57,8 @@ class _CreateTaskState extends State<CreateTask> {
       onWillPop: () async {
         Provider.of<CreateTaskViewModel>(context, listen: false).resetData();
         Provider.of<TaskListViewModel>(context, listen: false)
-            .getCompleteAndIncompleteData();
+            .getDateWiseTask(Provider.of<TaskListViewModel>(context, listen: false)
+            .currentDate);
         return true;
       },
       child: Scaffold(
@@ -144,7 +144,7 @@ class _CreateTaskState extends State<CreateTask> {
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0, bottom: 16),
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 24),
                         child: SizedBox(
                           width: 120,
                           height: 40,

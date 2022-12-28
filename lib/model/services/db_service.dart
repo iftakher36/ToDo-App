@@ -11,6 +11,7 @@ class DbService {
 
   DbService._init();
 
+  // single instance for db operation
   Future<Database> get database async {
     if (_database != null) {
       return _database!;
@@ -20,6 +21,7 @@ class DbService {
     }
   }
 
+  //get exact database reference
   Future<Database> getDb() async {
     final database =
         openDatabase(join(await getDatabasesPath(), 'todo_database.db'),

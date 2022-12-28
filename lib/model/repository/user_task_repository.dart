@@ -1,5 +1,5 @@
 import 'package:todolist/model/datamodel/todo_model.dart';
-
+import 'package:intl/intl.dart';
 import '../../utils/constant.dart';
 import '../services/db_service.dart';
 
@@ -17,7 +17,7 @@ class UserTask {
   }
 
   //update a row of database
-  Future<int> updateData(ToDoModel newToDoModel,int oldTaskId) async {
+  Future<int> updateData(ToDoModel newToDoModel, int oldTaskId) async {
     final db = await getDb();
     final id = await db.update(
       Constant.tblName,
@@ -27,18 +27,6 @@ class UserTask {
       },
       where: '${Constant.rowId} = ?',
       whereArgs: [oldTaskId],
-    );
-    return id;
-  }
-
-  //update a complete status of task
-  Future<int> updateTaskStatus(int rowId, bool status) async {
-    final db = await getDb();
-    final id = await db.update(
-      Constant.tblName,
-      {Constant.isTaskCompleted: status},
-      where: '${Constant.rowId} = ?',
-      whereArgs: [rowId],
     );
     return id;
   }
@@ -69,6 +57,48 @@ class UserTask {
     }
   }
 
+  //read date wise incomplete task
+  Future<List<ToDoModel>> readDateSpecificIncompleteTaskData(
+      DateTime dateTimeFrom, DateTime dateTimeTo) async {
+    final db = await getDb();
+    final results = await db.query(
+        "${Constant.tblName} where ${Constant.createDate} between '$dateTimeFrom' and '$dateTimeTo' and ${Constant.isTaskCompleted}='0' order by ${Constant.createDate}");
+    if (results.isNotEmpty) {
+      return List<ToDoModel>.from(
+          results.map((json) => ToDoModel.fromJson(json)).toList());
+    } else {
+      return [];
+    }
+  }
+
+
+  //read date wise complete task
+  Future<List<ToDoModel>> readDateSpecificCompleteTaskData(
+      DateTime dateTimeFrom, DateTime dateTimeTo) async {
+    final db = await getDb();
+    final results = await db.query(
+        "${Constant.tblName} where ${Constant.createDate} between '$dateTimeFrom' and '$dateTimeTo' and ${Constant.isTaskCompleted}='1' order by ${Constant.createDate}");
+    if (results.isNotEmpty) {
+      return List<ToDoModel>.from(
+          results.map((json) => ToDoModel.fromJson(json)).toList());
+    } else {
+      return [];
+    }
+  }
+
+  //update complete status of task
+  Future<int> updateTaskStatus(int rowId, bool status) async {
+    final db = await getDb();
+    final id = await db.update(
+      Constant.tblName,
+      {Constant.isTaskCompleted: status},
+      where: '${Constant.rowId} = ?',
+      whereArgs: [rowId],
+    );
+    return id;
+  }
+
+// delete specific row of database
   Future<int> deleteData(int rowId) async {
     final db = await getDb();
     final id = await db.delete(Constant.tblName,

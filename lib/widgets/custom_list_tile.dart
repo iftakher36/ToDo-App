@@ -38,7 +38,9 @@ class CustomListTile extends StatelessWidget {
                 child: Container(
                   height: 23,
                   width: 23,
+                  margin: const EdgeInsets.only(left: 8,right: 8,top: 5,bottom: 5),
                   decoration: BoxDecoration(
+                    
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     border: Border.all(color: Colors.grey,width: 2)

@@ -123,13 +123,15 @@ class CreateTaskViewModel with ChangeNotifier {
     resetData();
     //refresh for new changes
     Provider.of<TaskListViewModel>(context, listen: false)
-        .getCompleteAndIncompleteData();
+        .getDateWiseTask(Provider.of<TaskListViewModel>(context, listen: false)
+        .currentDate);
   }
 
   finishPage(BuildContext context) {
     Navigator.of(context).pop();
   }
 
+  // reset the data, while the page is not active to use it
   resetData() {
     toDoModelRoute = null;
     focusOnTaskTitle = false;

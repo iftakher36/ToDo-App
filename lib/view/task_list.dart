@@ -7,6 +7,7 @@ import 'package:todolist/viewmodel/task_list_viewmodel.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../widgets/custom_list_tile.dart';
 import '../widgets/custom_text.dart';
+import 'package:lottie/lottie.dart';
 
 class TaskList extends StatefulWidget {
   const TaskList({Key? key}) : super(key: key);
@@ -36,11 +37,16 @@ class _TaskListState extends State<TaskList> {
               Consumer<TaskListViewModel>(builder: (context, data, child) {
                 return Column(
                   children: [
-                    Text(data.getFormattedDate(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30,
-                        )),
+                    GestureDetector(
+                      onTap: () async {
+                        Provider.of<TaskListViewModel>(context,listen: false).getDateWiseTask(await showDatePicker(context: context, initialDate: Provider.of<TaskListViewModel>(context,listen: false).currentDate, firstDate: DateTime(2000), lastDate: DateTime(2200)));
+                      },
+                      child: Text(data.getFormattedDate(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 30,
+                          )),
+                    ),
                     Text(
                         "${data.incomplete.length} incomplete, ${data.complete.length} completed",
                         style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -56,6 +62,7 @@ class _TaskListState extends State<TaskList> {
               const SizedBox(
                 height: 10,
               ),
+              Provider.of<TaskListViewModel>(context,listen: true).checkNoTaskAvailablity()?
               Expanded(
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -63,7 +70,8 @@ class _TaskListState extends State<TaskList> {
                       itemBuilder: (context, index) {
                         return Consumer<TaskListViewModel>(
                             builder: (context, data, child) {
-                          return Container(
+                          return
+                          Container(
                             child: index == 0
                                 ? Provider.of<TaskListViewModel>(context,
                                             listen: false)
@@ -71,8 +79,7 @@ class _TaskListState extends State<TaskList> {
                                         .isNotEmpty
                                     ? ListView.builder(
                                         shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
+                                        physics: const NeverScrollableScrollPhysics(),
                                         itemCount: Provider.of<
                                                         TaskListViewModel>(
                                                     context,
@@ -100,7 +107,7 @@ class _TaskListState extends State<TaskList> {
                                                   icon: Icons.delete,
                                                   label: 'Delete',
                                                   onPressed: (BuildContext context) {
-                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteIncompleteTask(indexIncomplete-1);
+                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteIncompleteTask(indexIncomplete-1,context);
                                                   },
                                                 ),
                                               ],
@@ -161,7 +168,7 @@ class _TaskListState extends State<TaskList> {
                                                   icon: Icons.delete,
                                                   label: 'Delete',
                                                   onPressed: (BuildContext context) {
-                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteCompletedTask(indexComplete-1);
+                                                    Provider.of<TaskListViewModel>(context,listen: false).deleteCompletedTask(indexComplete-1,context);
                                                   },
                                                 ),
                                               ],
@@ -186,7 +193,21 @@ class _TaskListState extends State<TaskList> {
                                     : Container(),
                           );
                         });
-                      })),
+                      })):
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Positioned(
+                    bottom: 40,
+                    child: Text(
+                      "No task found.. try to add new task",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  Lottie.asset("assets/loading.json"),
+                ],
+              ),
               const SizedBox(
                 height: 10,
               )
