@@ -2,10 +2,22 @@
 
 A simple todo list application
 
+Here is some snap of my projects
 
-![Screenshot_20221228-214927](https://user-images.githubusercontent.com/25559056/209838550-fdb5d46a-3665-468a-b67b-58cdcbe00f3d.jpg)
-![Screenshot_20221228-215201](https://user-images.githubusercontent.com/25559056/209838560-160d7bf6-53b2-438c-85d1-22f303c3dd26.jpg)
-![Screenshot_20221228-214939](https://user-images.githubusercontent.com/25559056/209838565-aead0b47-3dff-42b1-b8e3-b46a40aed77b.jpg)
-[Android Task.docx](https://github.com/iftakher36/ToDo-App/files/10315030/Android.Task.docx)
-![Screenshot_20221228-215150](https://user-images.githubusercontent.com/25559056/209838569-e78a41ba-c3c0-42b3-9ca9-7100c64e4000.jpg)
-![Screenshot_20221228-215209](https://user-images.githubusercontent.com/25559056/209838573-22821728-bbdc-43d6-a7dc-a70f16c04838.jpg)
+Splash Screen
+![Splash Screen](https://user-images.githubusercontent.com/25559056/209838755-64bb0a58-f3a9-478b-aece-6825fb45c155.jpg)
+
+Task List Screen
+![Task List Screen](https://user-images.githubusercontent.com/25559056/209838878-78937035-fc12-43e2-99e7-d765baeef313.jpg)
+![Task List Screen](https://user-images.githubusercontent.com/25559056/209838888-f61f9442-9bb2-43a1-8e11-f7069ba4dcfb.jpg)
+
+Select date to get previous task list
+
+![Select date to get previous task list]
+(
+<img src="https://user-images.githubusercontent.com/25559056/209838905-a336aa1c-7961-41de-9f21-ef52d92d027c.jpg" width="48">)
+
+
+Create your Task
+![Create your Task](
+<img src="https://user-images.githubusercontent.com/25559056/209839010-ee74fff8-d817-4cd9-9c6d-8aafcc2a5243.jpg" width="48">)
